@@ -2,15 +2,35 @@ import React from 'react';
 
 class Spaceship extends React.Component {
 
-    render() {
+  constructor(props) {
+    super(props)
+  }
 
-        return(
 
-            <div>
+  render() {
+    return (
 
-            </div>
-        )
-    }
+
+      <div style={{
+        background: "red", height: 50, width: 50,
+        gridColumnStart: this.props.gridPositionColumn,
+        gridRowStart: this.props.gridPositionRow
+      }}
+        onKeyPress={(e)=>{
+          console.log(e)
+          this.props.onKeyPress(e)
+          }} >
+
+      </div>
+
+
+
+    )
+
+
+  }
 }
+
+
 
 export default Spaceship;
