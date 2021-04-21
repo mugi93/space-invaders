@@ -20,10 +20,15 @@ class App extends React.Component {
 
       console.log("je suis dedans")
     
-    if (e.keyCode == 39) {
+    if (e.charCode === 100) {
 
       this.setState({
-        spaceshipPositionRow : 7
+        spaceshipPositionRow : this.state.spaceshipPositionRow + 1
+      })
+    } else if (e.charCode === 113) {
+      
+      this.setState({
+        spaceshipPositionRow : this.state.spaceshipPositionRow - 1
       })
     }
 
@@ -48,9 +53,10 @@ class App extends React.Component {
 
         <Spaceship onKeyPress={this.keyDownHandler}
           gridPositionColumn={this.state.spaceshipPositionRow}
-          gridPositionRow={11}>
+          gridPositionRow={11} />
 
-        </Spaceship>
+
+        
       </div>
     )
   }

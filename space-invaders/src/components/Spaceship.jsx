@@ -11,15 +11,19 @@ class Spaceship extends React.Component {
     return (
 
 
-      <div style={{
+      <div 
+      style={{
         background: "red", height: 50, width: 50,
         gridColumnStart: this.props.gridPositionColumn,
         gridRowStart: this.props.gridPositionRow
       }}
         onKeyPress={(e)=>{
-          console.log(e)
+          
+          console.log(e);
           this.props.onKeyPress(e)
-          }} >
+          }}
+          
+          tabIndex={1}>
 
       </div>
 
