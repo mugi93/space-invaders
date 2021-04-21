@@ -31,8 +31,23 @@ class App extends React.Component {
   }
 
   renderGame() {
+    const messageStyle = {
+      margin: '0 auto',
+      width: '100vh',
+      height: '100vh',
+      backgroundColor: 'black',
+      fontFamily: 'space invaders',
+      color: 'white',
+      fontSize: '1.5rem',
+      textAlign: 'center',
+    };
+
     if (this.state.showResultWin === true) {
-      return <h1>You Win !!</h1>;
+      return (
+        <div style={messageStyle}>
+          <h1>You Win !!</h1>
+        </div>
+      );
     } else if (this.state.showResultLose === true) {
       return <h1>You Lose !!</h1>;
     } else {
@@ -72,7 +87,7 @@ class App extends React.Component {
   }
 
   render() {
-    return <div>{this.renderGame()}</div>;
+    return <>{this.renderGame()}</>;
   }
 }
 
