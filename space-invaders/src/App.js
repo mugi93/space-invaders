@@ -1,49 +1,52 @@
-import React from 'react';
+import React from "react";
 import './App.css';
-import Spaceship from './components/Spaceship';
+import Alien from './components/Alien';
 
 class App extends React.Component {
 
   constructor() {
-    super();
+    super()
+
     this.state = {
-      spaceshipPositionColumn: 23
+      alienPositionRow: 1,
+      displayAlien: 'grid'
     }
 
-      this.keyDownHandler = this.keyDownHandler.bind(this)
+    this.moveForwardAlien = this.moveForwardAlien.bind(this)
   }
 
-  componentDidMount() {
-    document.getElementById("bigDiv").focus()
-  }
+  moveForwardAlien() {
+    if (this.state.alienPositionRow <= 43) {
 
-  keyDownHandler(e) {
-    
-    if (e.keyCode === 39) {
-      this.setState({spaceshipPositionColumn : this.state.spaceshipPositionColumn + 1})
-    } else if (e.keyCode === 37) {
-      this.setState({spaceshipPositionColumn : this.state.spaceshipPositionColumn - 1})
+      this.setState({ alienPositionRow: this.state.alienPositionRow + 1 });
+
+      setTimeout(() => {
+        this.moveForwardAlien()
+      }, 1000);
+
+    } else {
+      this.setState({ displayAlien: 'none' });
     }
-  }
 
+  }
   render() {
     return (
 
-      <div onKeyDown={(e)=>{this.keyDownHandler(e)}}
-      id="bigDiv" 
-       tabIndex={1}
-      style={{
-        display: 'grid', gridTemplateColumns: 'repeat(45,14.2px)',
-        gridTemplateRows: 'repeat(45,14.2px)', justifyItems: 'center'
+      <div style={{
+        overflow: 'hidden', display: 'grid', gridTemplateColumns: 'repeat(11,1fr)',
+        gridTemplateRows: 'repeat(44, 14.2px)', justifyItems: 'center'
       }}>
+        <Alien myFunc={this.moveForwardAlien} display={this.state.displayAlien} gridPositionColumn={6}
+          gridPositionRow={this.state.alienPositionRow} />
 
-        <Spaceship
-          gridPositionColumn={this.state.spaceshipPositionColumn}
-          gridPositionRow={43} />
-      </div> 
+        <Alien myFunc={this.moveForwardAlien} display={this.state.displayAlien} gridPositionColumn={7}
+          gridPositionRow={this.state.alienPositionRow} />
+
+        <Alien myFunc={this.moveForwardAlien} display={this.state.displayAlien} gridPositionColumn={5}
+          gridPositionRow={this.state.alienPositionRow} />
+      </div>
     )
   }
 }
-
 
 export default App;
