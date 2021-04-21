@@ -7,8 +7,7 @@ class App extends React.Component {
   constructor() {
     super();
     this.state = {
-      spaceshipPositionRow: 6,
-
+      spaceshipPositionColumn: 23
     }
 
       this.keyDownHandler = this.keyDownHandler.bind(this)
@@ -21,13 +20,9 @@ class App extends React.Component {
   keyDownHandler(e) {
     
     if (e.keyCode === 39) {
-      this.setState({
-        spaceshipPositionRow : this.state.spaceshipPositionRow + 1
-      })
+      this.setState({spaceshipPositionColumn : this.state.spaceshipPositionColumn + 1})
     } else if (e.keyCode === 37) {
-      this.setState({
-        spaceshipPositionRow : this.state.spaceshipPositionRow - 1
-      })
+      this.setState({spaceshipPositionColumn : this.state.spaceshipPositionColumn - 1})
     }
   }
 
@@ -38,13 +33,13 @@ class App extends React.Component {
       id="bigDiv" 
        tabIndex={1}
       style={{
-        display: 'grid', gridTemplateColumns: 'repeat(11,1fr)',
-        gridTemplateRows: 'repeat(11,1fr)', justifyItems: 'center'
+        display: 'grid', gridTemplateColumns: 'repeat(45,14.2px)',
+        gridTemplateRows: 'repeat(45,14.2px)', justifyItems: 'center'
       }}>
 
         <Spaceship
-          gridPositionColumn={this.state.spaceshipPositionRow}
-          gridPositionRow={11} />
+          gridPositionColumn={this.state.spaceshipPositionColumn}
+          gridPositionRow={43} />
       </div> 
     )
   }
