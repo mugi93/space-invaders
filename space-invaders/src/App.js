@@ -46,7 +46,15 @@ class App extends React.Component {
 
     return (
 
-      <div style={{
+
+      <div 
+      onKeyPress={(e)=>{
+        
+        console.log(e);
+        this.keyDownHandler(e)
+      }}
+      tabIndex={1}
+      style={{
         display: 'grid', gridTemplateColumns: 'repeat(11,1fr)',
         gridTemplateRows: 'repeat(11,1fr)', justifyItems: 'center'
       }}>
@@ -58,6 +66,7 @@ class App extends React.Component {
 
         
       </div>
+        
     )
   }
 }

@@ -17,13 +17,14 @@ class Spaceship extends React.Component {
         gridColumnStart: this.props.gridPositionColumn,
         gridRowStart: this.props.gridPositionRow
       }}
-        onKeyPress={(e)=>{
+        // onKeyPress={(e)=>{
           
-          console.log(e);
-          this.props.onKeyPress(e)
-          }}
+        //   console.log(e);
+        //   this.props.onKeyPress(e)
+        //   }}
           
-          tabIndex={1}>
+        //   tabIndex={1}
+        >
 
       </div>
 
