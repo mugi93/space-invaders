@@ -1,5 +1,6 @@
 import React from "react";
 import './App.css';
+import Button from './components/Button'
 
 import Alien from './components/Alien';
 import Bullet from './components/Bullet';
@@ -32,6 +33,7 @@ class App extends React.Component {
 
       count: 0,
 
+      beginning: true,
       youLose: false,
       youWin: 0
     }
@@ -39,11 +41,20 @@ class App extends React.Component {
     this.moveForwardAlien = this.moveForwardAlien.bind(this)
     this.bulletShot = this.bulletShot.bind(this)
     this.keyDownHandler = this.keyDownHandler.bind(this)
+    this.toBegin = this.toBegin.bind(this)
 
   }
 
   componentDidMount() {
     document.getElementById("bigDiv").focus()
+  }
+
+  componentDidUpdate(prevState, prevProps) {
+    document.getElementById("bigDiv").focus()
+  }
+
+  toBegin() {
+    this.setState({ beginning: false })
   }
 
   keyDownHandler(e) {
@@ -60,7 +71,7 @@ class App extends React.Component {
         this.bulletShot();
         this.moveForwardAlien()
       } else {
-        
+
       }
     } else {
       if (e.keyCode === 39 && this.state.spaceshipPositionColumn < 40) {
@@ -134,34 +145,44 @@ class App extends React.Component {
   }
 
   render() {
-    return (
 
-      <div  onKeyDown={(e) => { this.keyDownHandler(e) }}
-        id="bigDiv"
-        tabIndex={1}
-        style={{
-          display: 'grid', gridTemplateColumns: 'repeat(45, 14.2px)',
-          gridTemplateRows: 'repeat(45, 14.2px)', justifyItems: 'center'
-        }}>
+    if (this.state.beginning === true) {
+      return (
+        <div id='bigDiv' style={{ display: "flex", flexDirection: "column", alignItems: 'center' }}>
+          <h1 style={{ color: "#BDB7B3", textAlign: "center", fontSize: 50 }}>Space Invaders </h1>
+          <section style={{ color: "#BDB7B3", fontStyle: 'italic', textAlign: "center", fontSize: 30 }}>Déplacez vous de droite à gauche en tirant sur les extraterrestres avant qu'ils ne descendent sur vous .</section>
+          <Button begin={this.toBegin}></Button>
+        </div>
+      )
+    } else {
+      return (
+        <div onKeyDown={(e) => { this.keyDownHandler(e) }}
+          id="bigDiv"
+          tabIndex={1}
+          style={{
+            display: 'grid', gridTemplateColumns: 'repeat(45, 14.2px)',
+            gridTemplateRows: 'repeat(45, 14.2px)', justifyItems: 'center'
+          }}>
 
-        <Alien display={this.state.displayAlien1} gridPositionColumn={18}
-          gridPositionRow={this.state.alienPositionRow} />
-        <Alien display={this.state.displayAlien2} gridPositionColumn={23}
-          gridPositionRow={this.state.alienPositionRow} />
-        <Alien display={this.state.displayAlien3} gridPositionColumn={28}
-          gridPositionRow={this.state.alienPositionRow} />
+          <Alien display={this.state.displayAlien1} gridPositionColumn={18}
+            gridPositionRow={this.state.alienPositionRow} />
+          <Alien display={this.state.displayAlien2} gridPositionColumn={23}
+            gridPositionRow={this.state.alienPositionRow} />
+          <Alien display={this.state.displayAlien3} gridPositionColumn={28}
+            gridPositionRow={this.state.alienPositionRow} />
 
 
-        <Bullet display={this.state.displayBullet} gridPositionColumn={this.state.bulletPositionColumn}
-          gridPositionRow={this.state.bulletPositionRow} />
+          <Bullet display={this.state.displayBullet} gridPositionColumn={this.state.bulletPositionColumn}
+            gridPositionRow={this.state.bulletPositionRow} />
 
 
-        <Spaceship
-          gridPositionColumn={this.state.spaceshipPositionColumn}
-          gridPositionRow={39} />
+          <Spaceship
+            gridPositionColumn={this.state.spaceshipPositionColumn}
+            gridPositionRow={39} />
 
-      </div>
-    )
+        </div>
+      )
+    }
   }
 }
 
