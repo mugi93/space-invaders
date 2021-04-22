@@ -16,11 +16,7 @@ class App extends React.Component {
     this.state = {
       alienPositionRow: 1,
 
-      //change to array
-      displayAlien1: 'grid',
-      displayAlien2: 'grid',
-      displayAlien3: 'grid',
-
+      displayAlien: [],
 
       //change to array of objects
       bulletPositionRow: 43,
@@ -30,12 +26,10 @@ class App extends React.Component {
       spaceshipPositionColumn: 23,
       // displaySpaceship: "grid",
 
-      aliensKilled: 0,
       count: 0,
 
       beginning: true,
-      showResultWin: false,
-      showResultLose: false,
+      lostGame: false,
     }
 
     this.moveForwardAlien = this.moveForwardAlien.bind(this)
@@ -51,7 +45,10 @@ class App extends React.Component {
   }
 
   toBegin() {
-    this.setState({ beginning: false })
+    this.setState({
+      beginning: false,
+      displayAlien: (new Array(10)).fill(true, 0)
+    })
   }
 
   keyDownHandler(e) {
@@ -84,52 +81,46 @@ class App extends React.Component {
       } else if (e.keyCode === 32) {
         this.bulletShot();
       }
-
-
     }
   }
 
   moveForwardAlien() {
-    if (this.state.alienPositionRow <= 40) {
-      this.setState({ alienPositionRow: this.state.alienPositionRow + 1 });
-
-      setTimeout(() => {
-        this.moveForwardAlien();
-      }, 500);
-    } else {
-      this.setState({
-        displayAlien1: 'none',
-        displayAlien2: 'none',
-        displayAlien3: 'none',
-        showResultLose: true
-      });
+    if (this.state.displayAlien.indexOf(true) !== -1) {
+      if (this.state.alienPositionRow <= 35) {
+        this.setState({ alienPositionRow: this.state.alienPositionRow + 1 });
+  
+        setTimeout(() => {
+          this.moveForwardAlien();
+        }, 500);
+      } else {
+        this.setState({
+          lostGame: true
+        });
+      }
     }
   }
 
   bulletShot() {
+    const bulletPositionColumn = this.state.bulletPositionColumn
 
-    console.log("on arrive ici");
+    for (let index = 0; index < this.state.displayAlien.length; index++) {
+      const middleColumnAlien = (index + 1) * 4
 
-    if ((this.state.bulletPositionColumn === 17
-      || this.state.bulletPositionColumn === 18
-      || this.state.bulletPositionColumn === 19)
-      && this.state.bulletPositionRow <= (this.state.alienPositionRow + 3)
-      && this.state.displayAlien1 === 'grid') {
-      return this.setState({ displayAlien1: 'none', displayBullet: 'none', bulletPositionRow: 43, aliensKilled: this.state.aliensKilled + 1 })
-    } else if ((this.state.bulletPositionColumn === 22
-      || this.state.bulletPositionColumn === 23
-      || this.state.bulletPositionColumn === 24)
-      && this.state.bulletPositionRow <= (this.state.alienPositionRow + 3)
-      && this.state.displayAlien2 === 'grid') {
-      return this.setState({ displayAlien2: 'none', displayBullet: 'none', bulletPositionRow: 43, aliensKilled: this.state.aliensKilled + 1 })
-    } else if ((this.state.bulletPositionColumn === 27
-      || this.state.bulletPositionColumn === 28
-      || this.state.bulletPositionColumn === 29)
-      && this.state.bulletPositionRow <= (this.state.alienPositionRow + 3)
-      && this.state.displayAlien3 === 'grid') {
-      return this.setState({ displayAlien3: 'none', displayBullet: 'none', bulletPositionRow: 43, aliensKilled: this.state.aliensKilled + 1 })
+      if (bulletPositionColumn >= middleColumnAlien - 1
+        && bulletPositionColumn <= middleColumnAlien + 1
+        && this.state.bulletPositionRow <= (this.state.alienPositionRow + 3)) {
+
+        const newDisplayAlien = [...this.state.displayAlien]
+
+        newDisplayAlien.splice(index, 1, false)
+
+        return this.setState({
+          displayAlien: newDisplayAlien,
+          displayBullet: 'none',
+          bulletPositionRow: 43,
+        })
+      }
     }
-
 
     if (this.state.bulletPositionRow >= 1) {
 
@@ -153,10 +144,10 @@ class App extends React.Component {
 
   renderGame() {
 
-    if (this.state.aliensKilled === 3 || this.state.showResultLose) {
+    if (this.state.displayAlien.length !== 0 && (this.state.displayAlien.indexOf(true) === -1 || this.state.lostGame)) {
       return (
         <div className='container'>
-          <img 
+          <img
             className='banner img'
             style={{ gridColumn: '1 / span 3' }}
             src={Banner}
@@ -185,7 +176,7 @@ class App extends React.Component {
           </span>
 
           <h2 className='gameOverDisplay' style={{ gridColumn: '1 / span 3' }}>
-            {this.state.showResultLose === true ? "GAME OVER" : "YOU WON !!!"}
+            {this.state.lostGame === true ? "GAME OVER" : "YOU WON !!!"}
           </h2>
         </div>
       );
@@ -208,17 +199,16 @@ class App extends React.Component {
               gridTemplateRows: 'repeat(45, 14.2px)', justifyItems: 'center'
             }}>
 
-            <Alien display={this.state.displayAlien1} gridPositionColumn={18}
-              gridPositionRow={this.state.alienPositionRow} />
-            <Alien display={this.state.displayAlien2} gridPositionColumn={23}
-              gridPositionRow={this.state.alienPositionRow} />
-            <Alien display={this.state.displayAlien3} gridPositionColumn={28}
-              gridPositionRow={this.state.alienPositionRow} />
-
+            {
+              this.state.displayAlien.map((elem, index) => {
+                if (elem) {
+                  return <Alien key={index} gridPositionColumn={(index + 1) * 4} gridPositionRow={this.state.alienPositionRow} />
+                }
+              })
+            }
 
             <Bullet display={this.state.displayBullet} gridPositionColumn={this.state.bulletPositionColumn}
               gridPositionRow={this.state.bulletPositionRow} />
-
 
             <Spaceship
               gridPositionColumn={this.state.spaceshipPositionColumn}
