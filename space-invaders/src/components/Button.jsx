@@ -1,21 +1,11 @@
 import React from 'react';
+import './style/Button.css';
 
 class Spaceship extends React.Component {
 
   render() {
     return (
-      <button onClick={this.props.begin}
-        style={{
-          color: "#BDB7B3",
-          fontSize: "20px",
-          borderRadius: "5px",
-          width: "200px",
-          height: "70px",
-          cursor: "pointer",
-          textAlign: "center",
-          marginTop: " 200px",
-          backgroundColor: "#bdb7b300"
-        }}>Go !</button>
+      <button onClick={this.props.begin}> Go ! </button>
     )
   }
 }

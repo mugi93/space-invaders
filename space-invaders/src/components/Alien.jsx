@@ -1,16 +1,15 @@
 import React from 'react';
+import './style/Alien.css';
 import ImgAlien from '../img/alien2.png'
+
 
 class Alien extends React.Component {
 
     render() {
 
         return (
-            <img src={ImgAlien}
+            <img className='alienComing' src={ImgAlien}
                 style={{
-                    display: "grid",
-                    width: '50px',
-                    height: '50px', 
                     gridColumnStart: this.props.gridPositionColumn,
                     gridRowStart: this.props.gridPositionRow
                 }}>
