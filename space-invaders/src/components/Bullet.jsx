@@ -1,15 +1,18 @@
 import React from 'react';
+import BulletImg from '../img/bullet.png';
 
 class Bullet extends React.Component {
 
     render() {
 
         return (
-            <div style={{
-                height: "20px", width: "15px", backgroundColor: "orange",
-                gridColumnStart: this.props.gridPositionColumn, gridRowStart: this.props.gridPositionRow,
-                display: this.props.display}} >
-            </div >
+            <img src={BulletImg}
+                style={{
+                    height: "30px", width: "30px",
+                    gridColumnStart: this.props.gridPositionColumn, gridRowStart: this.props.gridPositionRow,
+                    display: this.props.display
+                }} >
+            </img>
         )
     }
 }

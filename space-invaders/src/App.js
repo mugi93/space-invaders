@@ -1,8 +1,12 @@
 import React from "react";
 import './App.css';
+
 import Alien from './components/Alien';
 import Bullet from './components/Bullet';
 import Spaceship from './components/Spaceship';
+
+
+
 
 class App extends React.Component {
 
@@ -51,15 +55,17 @@ class App extends React.Component {
       } else if (e.keyCode === 37) {
         this.moveForwardAlien()
         this.setState({ spaceshipPositionColumn: this.state.spaceshipPositionColumn - 1, count: 1 })
-      } else if (e.keyCode === 32) {
+      } else if (e.keyCode === 32 && this.state.displayBullet === 'none') {
         this.setState({ count: 1 })
         this.bulletShot();
         this.moveForwardAlien()
+      } else {
+        
       }
     } else {
-      if (e.keyCode === 39) {
+      if (e.keyCode === 39 && this.state.spaceshipPositionColumn < 40) {
         this.setState({ spaceshipPositionColumn: this.state.spaceshipPositionColumn + 1 })
-      } else if (e.keyCode === 37) {
+      } else if (e.keyCode === 37 && this.state.spaceshipPositionColumn > 5) {
         this.setState({ spaceshipPositionColumn: this.state.spaceshipPositionColumn - 1 })
       } else if (e.keyCode === 32) {
         this.bulletShot();
@@ -91,19 +97,19 @@ class App extends React.Component {
     if ((this.state.bulletPositionColumn === 17
       || this.state.bulletPositionColumn === 18
       || this.state.bulletPositionColumn === 19)
-      && this.state.bulletPositionRow === (this.state.alienPositionRow + 3)
+      && this.state.bulletPositionRow <= (this.state.alienPositionRow + 3)
       && this.state.displayAlien1 === 'grid') {
       return this.setState({ displayAlien1: 'none', displayBullet: 'none', bulletPositionRow: 43, youWin: this.state.youWin + 1 })
     } else if ((this.state.bulletPositionColumn === 22
       || this.state.bulletPositionColumn === 23
       || this.state.bulletPositionColumn === 24)
-      && this.state.bulletPositionRow === (this.state.alienPositionRow + 3)
+      && this.state.bulletPositionRow <= (this.state.alienPositionRow + 3)
       && this.state.displayAlien2 === 'grid') {
       return this.setState({ displayAlien2: 'none', displayBullet: 'none', bulletPositionRow: 43, youWin: this.state.youWin + 1 })
     } else if ((this.state.bulletPositionColumn === 27
       || this.state.bulletPositionColumn === 28
       || this.state.bulletPositionColumn === 29)
-      && this.state.bulletPositionRow === (this.state.alienPositionRow + 3)
+      && this.state.bulletPositionRow <= (this.state.alienPositionRow + 3)
       && this.state.displayAlien3 === 'grid') {
       return this.setState({ displayAlien3: 'none', displayBullet: 'none', bulletPositionRow: 43, youWin: this.state.youWin + 1 })
     }
@@ -130,7 +136,7 @@ class App extends React.Component {
   render() {
     return (
 
-      <div onKeyDown={(e) => { this.keyDownHandler(e) }}
+      <div  onKeyDown={(e) => { this.keyDownHandler(e) }}
         id="bigDiv"
         tabIndex={1}
         style={{
@@ -152,7 +158,7 @@ class App extends React.Component {
 
         <Spaceship
           gridPositionColumn={this.state.spaceshipPositionColumn}
-          gridPositionRow={43} />
+          gridPositionRow={39} />
 
       </div>
     )

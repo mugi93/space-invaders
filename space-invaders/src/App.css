@@ -1,3 +1,15 @@
 *:focus {
     outline: none;
 }
+
+body {
+    margin: 0;
+    background-image: url(./img/galaxy_stars_universe_light_planet_63624_1280x720.jpg);
+    background-repeat: no-repeat;
+    background-position: cover;
+}
+
+#root {
+    display: flex;
+    justify-content: center;
+}
