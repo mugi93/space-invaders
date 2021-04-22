@@ -6,12 +6,9 @@ class Bullet extends React.Component {
 
         return (
             <div style={{
-                height: "20px", width: "15px", backgroundColor: "red",
-                gridColumnStart: this.props.gridPositionColumn, gridRowStart: this.props.gridPositionRow
-
-            }} >
-                <button style={{ backgroundColor: "orange", height: "20px", width: "15px" }} onClick={this.props.onClick} ></button>
-
+                height: "20px", width: "15px", backgroundColor: "orange",
+                gridColumnStart: this.props.gridPositionColumn, gridRowStart: this.props.gridPositionRow,
+                display: this.props.display}} >
             </div >
         )
     }

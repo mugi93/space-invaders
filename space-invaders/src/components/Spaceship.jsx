@@ -7,6 +7,7 @@ class Spaceship extends React.Component {
 
       <div 
       style={{
+        display: this.props.display,
         background: "red", height: 50, width: 50,
         gridColumnStart: this.props.gridPositionColumn,
         gridRowStart: this.props.gridPositionRow
