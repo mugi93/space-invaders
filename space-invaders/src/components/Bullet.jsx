@@ -1,4 +1,5 @@
 import React from 'react';
+import './style/Bullet.css';
 import BulletImg from '../img/bullet.png';
 
 class Bullet extends React.Component {
@@ -6,9 +7,10 @@ class Bullet extends React.Component {
     render() {
 
         return (
-            <img src={BulletImg}
+            <img
+                className='bulletImg'
+                src={BulletImg}
                 style={{
-                    height: "30px", width: "30px",
                     gridColumnStart: this.props.gridPositionColumn, gridRowStart: this.props.gridPositionRow,
                     display: this.props.display
                 }} >
@@ -16,6 +18,5 @@ class Bullet extends React.Component {
         )
     }
 }
-
 
 export default Bullet;

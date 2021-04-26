@@ -29,3 +29,53 @@ body {
     justify-items: center;
     align-items: center;
 }
+
+#bigDiv {
+    display: grid;
+    grid-template-columns: repeat(45, 14.2px);
+    grid-template-rows: repeat(45, 14.2px);
+    justify-items: center;
+}
+
+.banner {
+    grid-column: 1 / span 3;
+}
+
+.grandpaImg {
+    grid-column: 1 / 3;
+}
+
+.grandmaImg {
+    grid-column: 3 / 4;
+}
+
+.grandpa {
+    grid-column: 1 / 3;
+}
+
+.grandma {
+    grid-column: 3 / 4;
+}
+
+.gameOverDisplay {
+    grid-column: 1 / span 3;
+}
+
+#firstMenu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#firstMenu h1 {
+    color: rgb(189, 183, 179);
+    text-align: center;
+    font-size: 50px;
+}
+
+#firstMenu section {
+    color: rgb(189, 183, 179);
+    font-style: italic;
+    text-align: center;
+    font-size: 30px;
+}
