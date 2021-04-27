@@ -176,7 +176,7 @@ class App extends React.Component {
 
     // Si il ne reste aucun alien ou si on a perdu le jeu.
     if (this.state.displayAlien.length !== 0 && (this.state.displayAlien.indexOf(true) === -1 || this.state.lostGame)) {
-      <FinishedGame lostGame={this.state.lostGame === true ? "GAME OVER" : "YOU WON !!!"}/>
+     return <FinishedGame lostGame={this.state.lostGame === true ? "GAME OVER" : "YOU WON !!!"}/>
       // return (
       //   <div className='container'>
 
@@ -198,7 +198,7 @@ class App extends React.Component {
     } else {
       // 1/ Le state beginning est par defaut sur true donc la 1ere page que l'on a est celle çi.
       if (this.state.beginning) {
-        <StartGame bbegin={this.toBegin()} />
+         return <StartGame bbegin={this.toBegin()} />
         // return (
         //   <div id='firstMenu'>
         //     <h1>Space Invaders </h1>

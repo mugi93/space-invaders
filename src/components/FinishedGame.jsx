@@ -1,5 +1,5 @@
 import React from 'react';
-import Banner from '../img/space_invaders_banner.png';
+import Banner from "../img/space_invaders_banner.png"
 import Grandpa from '../img/space_invader_Grandpa.png';
 import Grandma from '../img/space_invader_Grandma.png';
 
