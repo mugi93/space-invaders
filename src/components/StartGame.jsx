@@ -9,7 +9,7 @@ class StartGame extends React.Component {
                 <h1>Space Invaders </h1>
                 <section>Déplacez vous de droite à gauche en tirant sur les extraterrestres avant qu'ils ne descendent sur vous .</section>
                 {/* 2/ Lorsque que l'on click sur ce button, ça appelle la fonction toBegin  */}
-                <Button begin={this.props.bbegin}></Button>
+                <Button begin={this.props.begin} ></Button>
             </div>
         )
 
